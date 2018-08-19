@@ -27,6 +27,8 @@ public class BeanLifeCycle {
        //③向容器中注册MyInstantiationAwareBeanPostProcessor后处理器
        ((ConfigurableBeanFactory)bf).addBeanPostProcessor(
                new MyInstantiationAwareBeanPostProcessor());
+
+
        //④第一次从容器中获取car，将触发容器实例化该Bean，这将引发Bean生命周期方法的调用。
        Car car1 = (Car)bf.getBean("car");
        car1.introduce();
@@ -34,7 +36,7 @@ public class BeanLifeCycle {
 
        //⑤第二次从容器中获取car，直接从缓存池中获取
        Car car2 = (Car)bf.getBean("car");
-
+       car2.introduce();
        //⑥查看car1和car2是否指向同一引用
        System.out.println("car1==car2:"+(car1==car2));
        //⑦关闭容器
